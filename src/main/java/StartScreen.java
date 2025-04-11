@@ -21,6 +21,7 @@ public class StartScreen {
     //Buttons
     private JButton createCharacterButton;
     private JButton startCombatButton;
+    public string dave = "Hi Dave";
 
     public static void main(String[] args){
         StartScreen gui = new StartScreen();
