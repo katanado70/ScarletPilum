@@ -1,3 +1,5 @@
+package refactoredFiles;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -29,7 +31,7 @@ public class LoadCharacter extends CharacterMaintenance{
         loadPane = (JPanel)loadFrame.getContentPane();
         loadPane.setPreferredSize(new Dimension(600,500));
 
-        //LoadCharacter ld = new LoadCharacter();
+        //RefactoredFiles.LoadCharacter ld = new RefactoredFiles.LoadCharacter();
         updateLoadContent();
 
         loadFrame.setSize(600, 500);
@@ -44,7 +46,7 @@ public class LoadCharacter extends CharacterMaintenance{
         loadPane = (JPanel)loadFrame.getContentPane();
         loadPane.setPreferredSize(new Dimension(600,500));
 
-        //LoadCharacter ld = new LoadCharacter();
+        //RefactoredFiles.LoadCharacter ld = new RefactoredFiles.LoadCharacter();
         updateLoadContent();
 
         loadFrame.setSize(600, 500);
@@ -230,7 +232,7 @@ public class LoadCharacter extends CharacterMaintenance{
         loadFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loadPane = (JPanel)loadFrame.getContentPane();
 
-        CharacterMaintenance cm = new CharacterMaintenance();
+        RefactoredFiles.CharacterMaintenance cm = new RefactoredFiles.CharacterMaintenance();
         //cm.makeCharacterCreationContent();
         cm.startCharacter();
 

@@ -1,14 +1,9 @@
-import javax.print.DocFlavor;
+package refactoredFiles;
+
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.TreeMap;
 
 public class StartScreen {
@@ -62,7 +57,7 @@ public class StartScreen {
         createCharacterButton.addActionListener(new createCharacterListener());
         panel.add(createCharacterButton);
 
-        startCombatButton = new JButton("Combat");
+        startCombatButton = new JButton("refactoredFiles.Combat");
         startCombatButton.addActionListener(new startCombatListener());
         panel.add(startCombatButton);
 
@@ -81,7 +76,7 @@ public class StartScreen {
 
             combat.combatStart();
             //JOptionPane.showMessageDialog(frame,
-            //        "This will open the Combat page.",
+            //        "This will open the refactoredFiles.Combat page.",
             //        "Place holder message",
             //        JOptionPane.WARNING_MESSAGE);
         }

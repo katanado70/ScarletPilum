@@ -1,4 +1,4 @@
-import refactoredFiles.LoadCharacter;
+package refactoredFiles;
 
 import javax.swing.*;
 import java.awt.*;

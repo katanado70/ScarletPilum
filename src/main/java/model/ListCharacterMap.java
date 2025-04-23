@@ -1,3 +1,5 @@
+package model;
+
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +14,10 @@ public class ListCharacterMap{
     public ListCharacterMap(int cNumber, String cName){
         characterNumber = cNumber;
         characterString = cName;
+    }
+
+    public ListCharacterMap() {
+        readCharacterClass();
     }
 
     /*public TreeMap<Integer, String> getListCharactersMap() {
@@ -42,4 +48,20 @@ public class ListCharacterMap{
 
         return listCharactersMap;
     }
+
+    public String get(int i) {
+        return characterString;
+    }
+
+    public int size() {
+        return characterNumber;
+    }
+
+    /*public int size() {
+        return characterNumber;
+    }*/
+
+    /*public String get(int i) {
+        return characterString;
+    }*/
 }

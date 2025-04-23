@@ -1,3 +1,5 @@
+package refactoredFiles;
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -685,7 +687,7 @@ public class CharacterMaintenance{
         resetCharacterButton.addActionListener(new resetCharacterListener());
         panel.add(resetCharacterButton);
 
-        startCombatButton = new JButton("Combat");
+        startCombatButton = new JButton("refactoredFiles.Combat");
         startCombatButton.addActionListener(new startCombatListener());
         panel.add(startCombatButton);
 
@@ -735,7 +737,7 @@ public class CharacterMaintenance{
             ccFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             characterPane = (JPanel)ccFrame.getContentPane();
 
-            LoadCharacter ld = new LoadCharacter();
+            RefactoredFiles.LoadCharacter ld = new RefactoredFiles.LoadCharacter();
             ld.updateCharacterContent();
 
             ccFrame.setSize(600, 500);
@@ -751,7 +753,7 @@ public class CharacterMaintenance{
     /*private void updateCharacterContent() {
         characterPane = (JPanel)ccFrame.getContentPane();
         characterPane.setLayout(new BorderLayout(6,6));
-        LoadCharacter ld = new LoadCharacter();
+        RefactoredFiles.LoadCharacter ld = new RefactoredFiles.LoadCharacter();
         makeNorthRegion();
         //makeUpdateCharacterWestRegion();
         ld.makeLoadPlayerWestRegion();
@@ -850,7 +852,7 @@ public class CharacterMaintenance{
 
     private class characterOneListener implements ActionListener {
         public void actionPerformed(ActionEvent ae) {
-            LoadCharacter ld = new LoadCharacter();
+            RefactoredFiles.LoadCharacter ld = new RefactoredFiles.LoadCharacter();
             String loadName = characterOneButton.getText();
             ld.updateContentLoader(loadName);
         }
@@ -858,7 +860,7 @@ public class CharacterMaintenance{
 
     private class characterTwoListener implements ActionListener {
         public void actionPerformed(ActionEvent ae) {
-            LoadCharacter ld = new LoadCharacter();
+            RefactoredFiles.LoadCharacter ld = new RefactoredFiles.LoadCharacter();
             String loadName = characterTwoButton.getText();
             ld.updateContentLoader(loadName);
         }
@@ -866,7 +868,7 @@ public class CharacterMaintenance{
 
     private class characterThreeListener implements ActionListener {
         public void actionPerformed(ActionEvent ae) {
-            LoadCharacter ld = new LoadCharacter();
+            RefactoredFiles.LoadCharacter ld = new RefactoredFiles.LoadCharacter();
             String loadName = characterThreeButton.getText();
             ld.updateContentLoader(loadName);
         }
@@ -874,7 +876,7 @@ public class CharacterMaintenance{
 
     private class characterFourListener implements ActionListener {
         public void actionPerformed(ActionEvent ae) {
-            LoadCharacter ld = new LoadCharacter();
+            RefactoredFiles.LoadCharacter ld = new RefactoredFiles.LoadCharacter();
             String loadName = characterFourButton.getText();
             ld.updateContentLoader(loadName);
         }
@@ -882,7 +884,7 @@ public class CharacterMaintenance{
 
     private class characterFiveListener implements ActionListener {
         public void actionPerformed(ActionEvent ae) {
-            LoadCharacter ld = new LoadCharacter();
+            RefactoredFiles.LoadCharacter ld = new RefactoredFiles.LoadCharacter();
             String loadName = characterFiveButton.getText();
             ld.updateContentLoader(loadName);
         }
@@ -900,7 +902,7 @@ public class CharacterMaintenance{
     private class startCombatListener implements ActionListener{
         public void actionPerformed(ActionEvent ae){
             JOptionPane.showMessageDialog(ccFrame,
-                    "This will open the Combat page.",
+                    "This will open the refactoredFiles.Combat page.",
                     "Place holder message",
                     JOptionPane.WARNING_MESSAGE);
         }
