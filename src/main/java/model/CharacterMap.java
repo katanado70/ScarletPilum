@@ -51,7 +51,7 @@ public class CharacterMap{
     }
 
     public void readCharacterClass(String loadName) {
-        File characterInfo = new File(loadName + ".txt");
+        File characterInfo = new File("data" + File.separator + loadName + ".txt");
         String newInfo = "";
         try{
             Scanner scan = new Scanner(characterInfo);
@@ -73,10 +73,9 @@ public class CharacterMap{
             scan.close();
         }
         catch (IOException e) {
-            JOptionPane.showMessageDialog(scarFrame, "I/O error in file\n\n" +
-                            "This program will close",
-                    "I/O Error",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,
+                    "Program will now close.\n\nError: " + e.toString(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(1);
         }
 

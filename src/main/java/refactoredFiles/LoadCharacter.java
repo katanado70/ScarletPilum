@@ -218,10 +218,9 @@ public class LoadCharacter extends CharacterMaintenance{
             scan.close();
         }
         catch (IOException e) {
-            JOptionPane.showMessageDialog(loadFrame, "I/O error in file\n\n" +
-                            "This program will close",
-                    "I/O Error",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,
+                    "Program will now close.\n\nError: " + e.toString(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(1);
         }
     }
