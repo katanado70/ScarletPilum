@@ -1,17 +1,16 @@
+package view;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.util.Scanner;
-import java.util.TreeMap;
+import java.net.URL;
 
-public class LoadCharacter extends CharacterMaintenance{
+public class LoadCharacterView {
     private JFrame loadFrame;
     private JPanel loadPane;
     //private TreeMap<String, String> characterMap = new TreeMap<String, String>();
-    private TreeMap<Integer, String> listCharactersMap = new TreeMap<Integer, String>();
+    //private TreeMap<Integer, String> listCharactersMap = new TreeMap<Integer, String>();
+    private model.ListCharacterMap listCharactersMap = new model.ListCharacterMap();
+    private controller.LoadCharacterController loadCharacterController = new controller.LoadCharacterController();
     //private ScarletTools scar = new ScarletTools();
     //update buttons and labels
     private JLabel previousLabel;
@@ -29,7 +28,7 @@ public class LoadCharacter extends CharacterMaintenance{
         loadPane = (JPanel)loadFrame.getContentPane();
         loadPane.setPreferredSize(new Dimension(600,500));
 
-        //LoadCharacter ld = new LoadCharacter();
+        //RefactoredFiles.LoadCharacter ld = new RefactoredFiles.LoadCharacter();
         updateLoadContent();
 
         loadFrame.setSize(600, 500);
@@ -44,7 +43,7 @@ public class LoadCharacter extends CharacterMaintenance{
         loadPane = (JPanel)loadFrame.getContentPane();
         loadPane.setPreferredSize(new Dimension(600,500));
 
-        //LoadCharacter ld = new LoadCharacter();
+        //RefactoredFiles.LoadCharacter ld = new RefactoredFiles.LoadCharacter();
         updateLoadContent();
 
         loadFrame.setSize(600, 500);
@@ -62,7 +61,10 @@ public class LoadCharacter extends CharacterMaintenance{
     }
 
     public void makeLoadNorthRegion(){
-        JLabel imgLabel = new JLabel(new ImageIcon("Penguins4.jpg"),JLabel.CENTER);
+        URL imageUrl = getClass().getResource("/Penguins4.jpg");
+        System.out.println("Image URL is: " + imageUrl);
+        //JLabel imgLabel = new JLabel(new ImageIcon("Penguins4.jpg"),JLabel.CENTER);
+        JLabel imgLabel = new JLabel(new ImageIcon(imageUrl),JLabel.CENTER);
         loadPane.add(imgLabel, BorderLayout.NORTH);
 
     }
@@ -75,7 +77,7 @@ public class LoadCharacter extends CharacterMaintenance{
         //panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
         //panel.setBorder(BorderFactory.createEmptyBorder(3,3,3,3));
 
-        readCharacterClass();
+        controller.LoadCharacterController.readCharacterClass();
 
         int listLength = listCharactersMap.size();
 
@@ -93,7 +95,7 @@ public class LoadCharacter extends CharacterMaintenance{
         previousHito.setLayout(new BoxLayout(previousHito,BoxLayout.X_AXIS));
         previousHito.setBorder(BorderFactory.createEmptyBorder(3,3,3,3));
         previousButton = new JButton("Previous");
-        previousButton.addActionListener(new previousCharacterListener());
+        previousButton.addActionListener(new controller.LoadCharacterController().previousCharacterListener());
         previousHito.add(previousButton);
         Panel.add(previousHito);
 
@@ -101,7 +103,7 @@ public class LoadCharacter extends CharacterMaintenance{
         characterOnePanel.setLayout(new BoxLayout(characterOnePanel,BoxLayout.X_AXIS));
         characterOnePanel.setBorder(BorderFactory.createEmptyBorder(3,3,3,3));
         characterOneButton = new JButton(hitoZero);
-        characterOneButton.addActionListener(new characterOneListener());
+        characterOneButton.addActionListener(new controller.LoadCharacterController().characterOneListener());
         characterOnePanel.add(characterOneButton);
         Panel.add(characterOnePanel);
 
@@ -109,7 +111,7 @@ public class LoadCharacter extends CharacterMaintenance{
         characterTwoPanel.setLayout(new BoxLayout(characterTwoPanel,BoxLayout.X_AXIS));
         characterTwoPanel.setBorder(BorderFactory.createEmptyBorder(3,3,3,3));
         characterTwoButton = new JButton(one);
-        characterTwoButton.addActionListener(new characterTwoListener());
+        characterTwoButton.addActionListener(new controller.LoadCharacterController().characterTwoListener());
         characterTwoPanel.add(characterTwoButton);
         Panel.add(characterTwoPanel);
 
@@ -117,7 +119,7 @@ public class LoadCharacter extends CharacterMaintenance{
         characterThreePanel.setLayout(new BoxLayout(characterThreePanel,BoxLayout.X_AXIS));
         characterThreePanel.setBorder(BorderFactory.createEmptyBorder(3,3,3,3));
         characterThreeButton = new JButton(hitoTwo);
-        characterThreeButton.addActionListener(new characterThreeListener());
+        characterThreeButton.addActionListener(new controller.LoadCharacterController().characterThreeListener());
         characterThreePanel.add(characterThreeButton);
         Panel.add(characterThreePanel);
 
@@ -125,7 +127,7 @@ public class LoadCharacter extends CharacterMaintenance{
         characterFourPanel.setLayout(new BoxLayout(characterFourPanel,BoxLayout.X_AXIS));
         characterFourPanel.setBorder(BorderFactory.createEmptyBorder(3,3,3,3));
         characterFourButton = new JButton(hitoThree);
-        characterFourButton.addActionListener(new characterFourListener());
+        characterFourButton.addActionListener(new controller.LoadCharacterController().characterFourListener());
         characterFourPanel.add(characterFourButton);
         Panel.add(characterFourPanel);
 
@@ -133,7 +135,7 @@ public class LoadCharacter extends CharacterMaintenance{
         characterFivePanel.setLayout(new BoxLayout(characterFivePanel,BoxLayout.X_AXIS));
         characterFivePanel.setBorder(BorderFactory.createEmptyBorder(3,3,3,3));
         characterFiveButton = new JButton(hitoFour);
-        characterFiveButton.addActionListener(new characterFiveListener());
+        characterFiveButton.addActionListener(new controller.LoadCharacterController().characterFiveListener());
         characterFivePanel.add(characterFiveButton);
         Panel.add(characterFivePanel);
 
@@ -141,109 +143,10 @@ public class LoadCharacter extends CharacterMaintenance{
         forwardHito.setLayout(new BoxLayout(forwardHito,BoxLayout.X_AXIS));
         forwardHito.setBorder(BorderFactory.createEmptyBorder(3,3,3,3));
         forwardButton= new JButton("Next");
-        forwardButton.addActionListener(new forwardCharacterListener());
+        forwardButton.addActionListener(new controller.LoadCharacterController().forwardCharacterListener());
         forwardHito.add(forwardButton);
         Panel.add(forwardHito);
 
         loadPane.add(Panel, BorderLayout.WEST);
     }
-
-    private class previousCharacterListener implements ActionListener {
-        public void actionPerformed(ActionEvent ae) {
-            JOptionPane.showMessageDialog(loadFrame,
-                    "previous set placeholder",
-                    "Under construction",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private class characterOneListener implements ActionListener {
-        public void actionPerformed(ActionEvent ae) {
-            String loadName = characterOneButton.getText();
-            updateContentLoader(loadName);
-        }
-    }
-
-    private class characterTwoListener implements ActionListener {
-        public void actionPerformed(ActionEvent ae) {
-            String loadName = characterTwoButton.getText();
-            updateContentLoader(loadName);
-        }
-    }
-
-    private class characterThreeListener implements ActionListener {
-        public void actionPerformed(ActionEvent ae) {
-            String loadName = characterThreeButton.getText();
-            updateContentLoader(loadName);
-        }
-    }
-
-    private class characterFourListener implements ActionListener {
-        public void actionPerformed(ActionEvent ae) {
-            String loadName = characterFourButton.getText();
-            updateContentLoader(loadName);
-        }
-    }
-
-    private class characterFiveListener implements ActionListener {
-        public void actionPerformed(ActionEvent ae) {
-            String loadName = characterFiveButton.getText();
-            updateContentLoader(loadName);
-        }
-    }
-
-    private class forwardCharacterListener implements ActionListener {
-        public void actionPerformed(ActionEvent ae) {
-            JOptionPane.showMessageDialog(loadFrame,
-                    "forward to the next 5",
-                    "Under construction",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    public void readCharacterClass() {
-        File characterList = new File("characterList.txt");
-
-        listCharactersMap = new TreeMap<Integer, String>();
-        try{
-            int ch = 0;
-            Scanner scan = new Scanner(characterList);
-            while (scan.hasNext()){
-                String name = scan.next();
-                listCharactersMap.put(ch, name);
-                ch++;
-            }
-            scan.close();
-        }
-        catch (IOException e) {
-            JOptionPane.showMessageDialog(loadFrame, "I/O error in file\n\n" +
-                            "This program will close",
-                    "I/O Error",
-                    JOptionPane.ERROR_MESSAGE);
-            System.exit(1);
-        }
-    }
-
-    public void updateContentLoader(String loadName){
-
-        /*loadFrame = new JFrame("Scarlet Pilum");
-        loadFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        loadPane = (JPanel)loadFrame.getContentPane();
-
-        CharacterMaintenance cm = new CharacterMaintenance();
-        //cm.makeCharacterCreationContent();
-        cm.startCharacter();
-
-        loadFrame.setSize(600, 500);
-        loadFrame.setVisible(true);
-
-        cm.readCharacterClass(loadName);
-
-        cm.setCharacter();*/
-
-        CharacterMaintenance cm = new CharacterMaintenance();
-        cm.startCharacter(loadName);
-    }
-
 }
-

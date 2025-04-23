@@ -1,14 +1,21 @@
+package view;
+
+import refactoredFiles.LoadCharacter;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.TreeMap;
 
-public class Combat {
-    private JFrame combatFrame;
-    private JPanel combatPane;
+public class CombatView {
+    private static JFrame combatFrame;
+    private static JPanel combatPane;
     //private TreeMap<String, String> characterMap = new TreeMap<String, String>();
-    private TreeMap<Integer, String> listCharactersMap = new TreeMap<Integer, String>();
+    //private TreeMap<Integer, String> listCharactersMap = new TreeMap<Integer, String>();
+    private model.ListCharacterMap listCharacterMap = new model.ListCharacterMap();
+    private static LoadCharacter loadCharacter = new LoadCharacter();
     //private ScarletTools scar = new ScarletTools();
     //update buttons and labels
 
@@ -38,11 +45,19 @@ public class Combat {
     }
 
     private void makeCombatNorthRegion(){
-        JLabel imgLabel = new JLabel(new ImageIcon("Penguins4.jpg"),JLabel.CENTER);
+        //JLabel imgLabel = new JLabel(new ImageIcon("Penguins4.jpg"),JLabel.CENTER);
+        URL imageUrl = getClass().getResource("/Penguins4.jpg");
+        System.out.println("Image URL is: " + imageUrl);
+        if (imageUrl == null) {
+            //System.out.println("Image not found. is not in the src/main/resources folder. ");
+            //return;
+            throw new RuntimeException("Image not found. is not in the src/main/resources/Penguins4.jpg folder. ");
+        }
+        JLabel imgLabel = new JLabel(new ImageIcon(imageUrl),JLabel.CENTER);
         combatPane.add(imgLabel, BorderLayout.NORTH);
     }
 
-    private void makeCombatWestRegion(){
+    private static void makeCombatWestRegion(){
         /*player label
         player hit points
         image
@@ -94,35 +109,17 @@ public class Combat {
         heroOptionPanel.setLayout(new BoxLayout(heroOptionPanel, BoxLayout.X_AXIS));
         heroOptionPanel.setBorder(BorderFactory.createEmptyBorder());
         heroAttackButton = new JButton("Attack");
-        heroAttackButton.addActionListener(new heroAttackButtonListener());
+        heroAttackButton.addActionListener(new controller.CombatController().heroAttackButtonListener());
         heroOptionPanel.add(heroAttackButton);
         heroDefendButton = new JButton("Defend");
-        heroDefendButton.addActionListener(new heroDefendButtonListener());
+        heroDefendButton.addActionListener(new controller.CombatController().heroDefendButtonListener());
         heroOptionPanel.add(heroDefendButton);
         heroPanel.add(heroOptionPanel);
 
         combatPane.add(heroPanel, BorderLayout.WEST);
     }
 
-    private class heroAttackButtonListener implements ActionListener {
-        public void actionPerformed(ActionEvent ae) {
-            JOptionPane.showMessageDialog(combatFrame,
-                    "This will attack",
-                    "Attack",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private class heroDefendButtonListener implements ActionListener {
-        public void actionPerformed(ActionEvent ae) {
-            JOptionPane.showMessageDialog(combatFrame,
-                    "This will defend",
-                    "Defend",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void makeCombatCenterRegion(){
+    private static void makeCombatCenterRegion(){
         /*Turn counter centered
         image space
          */
@@ -155,7 +152,7 @@ public class Combat {
         combatPane.add(panel, BorderLayout.CENTER);
     }
 
-    private void makeCombatEastRegion(){
+    private static void makeCombatEastRegion(){
         /*Monster Name
         image
         Hit Point counter
@@ -197,7 +194,7 @@ public class Combat {
         combatPane.add(monsterPanel, BorderLayout.EAST);
     }
 
-    private void makeCombatSouthRegion(){
+    private static void makeCombatSouthRegion(){
         /*load character button
             if character is already loaded this will reset character
                 can not do during combat
@@ -221,106 +218,27 @@ public class Combat {
         panel.setAlignmentY(Component.CENTER_ALIGNMENT);
 
         loadCharacterButton = new JButton("Load Character");
-        loadCharacterButton.addActionListener(new loadHeroListener());
+        loadCharacterButton.addActionListener(new controller.CombatController().loadHeroListener());
         panel.add(loadCharacterButton);
 
         switchCharacterButton = new JButton("Switch Characters");
-        switchCharacterButton.addActionListener(new switchHeroListener());
+        switchCharacterButton.addActionListener(new controller.CombatController().switchHeroListener());
         panel.add(switchCharacterButton);
 
         updateCharacterButton = new JButton("Update Character");
-        updateCharacterButton.addActionListener(new updateHeroListener());
+        updateCharacterButton.addActionListener(new controller.CombatController().updateHeroListener());
         panel.add(updateCharacterButton);
 
         makeNewCharacterButton = new JButton("Make a new Character");
-        makeNewCharacterButton.addActionListener(new makeNewHeroListener());
+        makeNewCharacterButton.addActionListener(new controller.CombatController().makeNewHeroListener());
         panel.add(makeNewCharacterButton);
 
         goToHomeButton = new JButton("Go to Home");
-        goToHomeButton.addActionListener(new goToHomeListener());
+        goToHomeButton.addActionListener(new controller.CombatController().goToHomeListener());
         panel.add(goToHomeButton);
 
         combatPane.add(panel, BorderLayout.SOUTH);
 
     }
 
-    private class loadHeroListener implements ActionListener {
-        public void actionPerformed(ActionEvent ae) {
-            /*JOptionPane.showMessageDialog(combatFrame,
-                    "This will load the hero",
-                    "load",
-                    JOptionPane.ERROR_MESSAGE);*/
-
-            LoadCharacter ld = new LoadCharacter();
-            ld.startLoadCharacter();
-        }
-    }
-
-    private class switchHeroListener implements ActionListener {
-        public void actionPerformed(ActionEvent ae) {
-            JOptionPane.showMessageDialog(combatFrame,
-                    "This will load a different hero",
-                    "switch",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private class updateHeroListener implements ActionListener {
-        public void actionPerformed(ActionEvent ae) {
-            JOptionPane.showMessageDialog(combatFrame,
-                    "This will go to update character",
-                    "update",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private class makeNewHeroListener implements ActionListener {
-        public void actionPerformed(ActionEvent ae) {
-            JOptionPane.showMessageDialog(combatFrame,
-                    "This will go to home",
-                    "home",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private class goToHomeListener implements ActionListener {
-        public void actionPerformed(ActionEvent ae) {
-            JOptionPane.showMessageDialog(combatFrame,
-                    "This will load the hero",
-                    "load",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void combatCalculator(){
-        /*Player choice Attack or Defend
-        Display choice in center panel?
-        if attack add bonus to attack
-            display attack pose in center
-        if defend add bonus to defense
-            display defense pose in center
-
-        (consider bonuses for element vs element with avatar rules)
-
-        calculate attack versus defense
-        if successful change monsters hit points
-
-        Monster attacks
-        calculate attack versus players modified defense
-        if successful update players displayed hit points
-
-        if monster hit points hits zero first
-            display you win!
-            update character points with win amount(1-5 points?)
-        if player hit points hits zero first
-            display you lose!
-            update character points with lose amount (1?)
-
-        probably choice to fight again or load different character
-            fight again load next monster
-            load character goes to combat load choice
-         */
-    }
-
 }
-

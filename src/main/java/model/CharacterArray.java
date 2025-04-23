@@ -1,3 +1,5 @@
+package model;
+
 public class CharacterArray{
     private String name;
     private int points;

@@ -1,3 +1,5 @@
+package model;
+
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
@@ -40,11 +42,15 @@ public class CharacterMap{
         hitPoints = cHitPoints;
     }
 
+    public CharacterMap() {
+        readCharacterClass("characterInfo");
+    }
+
     public TreeMap<String, String> getCharacterMap() {
         return characterMap;
     }
 
-    public TreeMap<String, String> readCharacterClass(String loadName) {
+    public void readCharacterClass(String loadName) {
         File characterInfo = new File(loadName + ".txt");
         String newInfo = "";
         try{
@@ -74,7 +80,6 @@ public class CharacterMap{
             System.exit(1);
         }
 
-        return characterMap;
     }
 
     /*public String getCharacterString(){
